@@ -15,7 +15,7 @@
         <a v-link="{path:'seller'}">商家</a>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 
 </template>
@@ -33,11 +33,11 @@
       };
     },
     created() {
+      // 发ajax
       this.$http.get('/api/seller').then((response) => {
         response = response.body;
         if (response.errno === ERR_OK) {
           this.seller = response.data;
-          console.log(this.seller);
         }
       });
     },
