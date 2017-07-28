@@ -32,4 +32,4 @@ router.map({
 
 router.start(app, '#app');// 放在哪里
 
-router.go('/goods');// 默认路由位置
+// router.go('/goods');// 默认路由位置
