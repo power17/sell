@@ -175,14 +175,15 @@ export default {
         }
       }
     },
+    // 详情页的折叠状态
     toggleList() {
       if (!this.totalCount) {
         return;
       }
       this.fold = !this.fold;
     },
+    // 清空商品详情列表
     empty() {
-      // 清空商品详情列表
       this.selectFoods.forEach((food) => {
         food.count = 0;
     });
@@ -200,7 +201,6 @@ export default {
     }
   },
   // 详情页开关
-
   transitions: {
     drop: {
       beforeEnter(el) {

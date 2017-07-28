@@ -106,7 +106,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin";
-
   .header
     position: relative
     overflow: hidden
@@ -223,6 +222,7 @@
       z-index: -1
       filter: blur(10px)
 //  ************************** 弹出层   *****************
+  .header
     .detail
       position: fixed
       z-index: 100

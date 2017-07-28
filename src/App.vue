@@ -17,7 +17,6 @@
     </div>
     <router-view :seller="seller"></router-view>
   </div>
-
 </template>
 
 <script type="text/ecmascript-6">

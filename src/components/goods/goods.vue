@@ -14,9 +14,9 @@
         <li v-for="item in goods" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-1px">
+            <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
               <div class="icon">
-                <img width="57" height="57" :src="food.icon" alt="" class="food icon">
+                <img width="57" height="57" :src="food.icon" alt="">
               </div>
               <div class="content">
                 <h2 class="name">{{food.name}}</h2>
@@ -35,25 +35,24 @@
               </div>
             </li>
           </ul>
-
         </li>
       </ul>
     </div>
     <!--小球特效拿到子组件的dom-->
     <shopcart v-ref:shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
-
-
-
+  <food :food="selectedFood" v-ref:food></food>
 </template>
 
 <script type="text/ecmascript-6">
   // 引入better-scroll库
   import BScroll from 'better-scroll';
   // 引入购物车
-  import shopcart from 'components/shopcart/shopcart.vue';
+  import shopcart from 'components/shopcart/shopcart';
   // 引入数量点击模块
   import cartcontrol from 'components/cartcontrol/cartcontrol';
+  // 引入food模块
+  import food from 'components/food/food';
   // 设置变量
   const ERR_OK = 0;
   export default {
@@ -70,7 +69,8 @@
         // 滚动list高度变量
         listHeight: [],
         // 滚动的y值
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       };
     },
     created() {
@@ -100,6 +100,7 @@
         }
         return 0;
       },
+      // 购物车联动样式的观察变量
       selectFoods() {
         let foods = [];
         this.goods.forEach((good) => {
@@ -152,6 +153,13 @@
           this.listHeight.push(height);
         }
       },
+      selectFood(food, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectedFood = food;
+        this.$refs.food.show();
+      },
       // 小球运动动画
       _drop(target) {
         // 父组件调用子组件的方法,体验优化，异步执行动画
@@ -163,10 +171,11 @@
     },
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     },
     events: {
-      // 从shopcontrol获取事件源
+      // 从shopcontrol获取事件源(小球动画事件源)
       'cart.add'(target) {
         this._drop(target);
       }
