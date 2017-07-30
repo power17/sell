@@ -31,7 +31,7 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
-    <!********************--弹出层--********************>
+   <!--**********************弹出层*************************-->
     <div v-show="detailShow" class="detail" transition="fade">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
